@@ -1,7 +1,8 @@
 from Deck import Deck
-mainDeck = Deck()
 
 class Player:
+
+    mainDeck = Deck()
 
     cardsAvail = []             # Cards availiable in player hands
 
@@ -9,28 +10,32 @@ class Player:
         self.cardsAvail = []
 
     def takeCard(self):         # To take cards form deck
-        x=10
+        self.cardsAvail.append(Player.mainDeck.giveCard())
 
     def passTurn(self):         # To pass turn
         x=10
 
     def makeTurn(self, n):      # To make turn with card "n" form cardsAvial[]
-        x=10
+        selectedCard = self.cardsAvail[n]
+        del self.cardsAvail[n]
+        return selectedCard
 
     def showCards(self):        # Do display availiable cards
-        x=10
+        return self.cardsAvail
 
 def makePlayer():
     player = Player()
     for i in range (0, 4):
-        player.cardsAvail.append(mainDeck.giveCard())
+        player.cardsAvail.append(Player.mainDeck.giveCard())
     return player
 
 player1 = makePlayer()
 player2 = makePlayer()
-player3 = makePlayer()
+#player3 = makePlayer()
+player1.takeCard()
 
-print(player1.cardsAvail)
-print(player2.cardsAvail)
-print(player3.cardsAvail)
-print(mainDeck.cardsDeck)
+print(player1.showCards())
+o = player1.makeTurn(2)
+print(player1.showCards(), o)
+
+print(len(player2.mainDeck.cardsDeck))

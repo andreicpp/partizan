@@ -10,6 +10,7 @@ class Deck:
                  "Qc", "Qd", "Qh", "Qs",
                  "Kc", "Kd", "Kh", "Ks",
                  "Ac", "Ad", "Ah", "As"]
+    usedCards = []
 
     def __init__(self):
         random.shuffle(self.cardsDeck)
@@ -18,9 +19,18 @@ class Deck:
         random.shuffle(self.cardsDeck)
 
     def giveCard(self):
-        #if (len(self.cardsDeck) == 0):
-            #getTableDiscard
+        if (len(self.cardsDeck) == 0):
+            self.cardsDeck = self.usedCards
+            self.usedCards = []
+            self.shuffleDeck
         i = random.randint(0, len(self.cardsDeck)-1)
         newCard = self.cardsDeck[i]
         del self.cardsDeck[i]
         return newCard
+
+
+# c=Deck()
+# for i in range (0, 33):
+#     print(c.cardsDeck)
+#     print(c.giveCard())
+# print(c.cardsDeck)
