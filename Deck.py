@@ -11,30 +11,28 @@ class Deck:
                  "Qc", "Qd", "Qh", "Qs",
                  "Kc", "Kd", "Kh", "Ks",
                  "Ac", "Ad", "Ah", "As"]
-    currnetCard = ""
+    currentCard = ""
     usedCards = []
     cardsOnTable = []
 
+
     def __init__(self):
         random.shuffle(self.cardsDeck)
-        self.currnetCard = self.cardsDeck[0]
-        self.cardsOnTable = self.cardsDeck[0]
-        del self.cardsDeck[0]
 
     def discardPile(self):
         self.usedCards = self.cardsOnTable
         self.cardsOnTable = []
-        self.currnetCard = ""
+        self.currentCard = ""
 
     def abbadonDefense(self):
         cards = self.cardsOnTable
         self.cardsOnTable = []
-        self.currnetCard = ""
+        self.currentCard = ""
         return cards
 
     def putCardOnTable(self, card):
         self.cardsOnTable += card
-        self.currnetCard = card
+        self.currentCard = card
 
     def giveCard(self):
         if (len(self.cardsDeck) == 0):
@@ -49,11 +47,11 @@ class Deck:
     def shuffleDeck(self):
         random.shuffle(self.cardsDeck)
 
-    def showCurrentCardOnTable(self):
-        return self.currnetCard
+    def getCurrentCardOnTable(self):
+        return self.currentCard
 
-    def showAllCardsInDeck(self):
+    def getAllCardsInDeck(self):
         return self.cardsDeck
 
-    def showAllUsedCards(self):
+    def getAllUsedCards(self):
         return self.usedCards

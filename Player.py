@@ -8,16 +8,13 @@ class Player:
     def takeCardfromDeck(self, card):                                               # To take cards form deck
         self.cardsAvail.append(card)
 
-    def passTurn(self):                                                             # To pass turn
-        x=10
-
     def makeTurn(self, n):                                                          # To make turn with card "n" form cardsAvial[]
         selectedCard = self.cardsAvail[n]
         del self.cardsAvail[n]
         return selectedCard
 
-    def showCards(self):                                                            # Do display availiable cards
-        return self.cardsAvail
+    def getPlayerCards(self, n=0):                                      # Do display availiable cards
+        return self.cardsAvail[n:len(self.cardsAvail)]
 
 def makePlayer(card1, card2, card3, card4):                                         # Player constructor
     player = Player()
