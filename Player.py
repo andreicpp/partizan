@@ -29,13 +29,13 @@ def makePlayer():
         player.cardsAvail.append(Player.mainDeck.giveCard())
     return player
 
-player1 = makePlayer()
-player2 = makePlayer()
-#player3 = makePlayer()
-player1.takeCard()
-
-print(player1.showCards())
-o = player1.makeTurn(2)
-print(player1.showCards(), o)
-
-print(len(player2.mainDeck.cardsDeck))
+# player1 = makePlayer()
+# player2 = makePlayer()
+# #player3 = makePlayer()
+# player1.takeCard()
+# player1.cardsAvail += ["ss", "ss1", "ss2"]
+#
+# print(player1.showCards())
+# print(player2.showCards())
+# o = player1.makeTurn(2)
+# print(player1.showCards(), o)
