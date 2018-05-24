@@ -24,9 +24,3 @@ class Deck:
         newCard = self.cardsDeck[i]
         del self.cardsDeck[i]
         return newCard
-
-c = Deck()
-for i in range (0, 32):
-    print(c.cardsDeck)
-    print(c.giveCard())
-print(c.cardsDeck)
