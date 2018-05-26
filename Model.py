@@ -11,7 +11,7 @@ deck.cardsDeck = deck.cardsDeck[-len(deck.cardsDeck)+PLAYERNUM*4:]
 deck.putCardOnTable (game.playersArray[game.currentPlayer].getPlayerCards(3))
 game.playersArray[game.currentPlayer].makeTurn(3)
 
-def checkCurrentCard(card):
+def checkCurrentCardOnTable(card):
 
     if ("6" in card[0]):
         if (game.currentPlayer == 0): i = PLAYERNUM-1;
@@ -24,19 +24,19 @@ def checkCurrentCard(card):
         for j in range (0, 2):
             game.playersArray[i].takeCardfromDeck(deck.giveCard())
 
-    if ("9d" in card[0]):
+    if ("9d" in card):
         if (game.currentPlayer == PLAYERNUM-1): i = 0
         else : i = game.currentPlayer+1
         for j in range (0, 5):
             game.playersArray[i].takeCardfromDeck(deck.giveCard())
 
 
-#deck.currentCard = "9"
+#deck.currentCard = ["9d"]
 
 # kl = 0
 # while(kl<1):
 #     kl+=1
-checkCurrentCard(deck.getCurrentCardOnTable())
+checkCurrentCardOnTable(deck.getCurrentCardOnTable())
 
 
 print (deck.getCurrentCardOnTable())
