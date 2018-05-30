@@ -37,11 +37,14 @@ def checkCurrentCardOnTable(card):
     if ("A" in card[0]):
         game.nextPlayerTurn()
 
+
+
 def checkIfEnd():
-    for i in range (0, PLAYERNUM)
-        if (len(game.playersArray[i].getPlayerCards()) = 0)
-        return True
+    for i in range (0, PLAYERNUM):
+        if (len(game.playersArray[i].getPlayerCards()) == 0):
+            return True
     return False
+
 #deck.currentCard = ["9d"]
 
 # kl = 0

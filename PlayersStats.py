@@ -6,7 +6,7 @@ class PlayersStats:
     numberOfPlayers = 0
     currentPlayer = 0                       #from 0 to N-1
     playersScore = []
-    playersArray = []
+    playersArray = []                       #
     currentSuit = ""
 
     def __init__ (self, num, cardArr):
@@ -32,6 +32,6 @@ class PlayersStats:
 
     def getCurrnetSuit(self):
         return self.currentSuit
-        
+
     def howMuchPlayers(self):
         return self.numberOfPlayers
