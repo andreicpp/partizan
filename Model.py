@@ -8,9 +8,12 @@ deck = Deck()
 
 game = PlayersStats(PLAYERNUM, deck.cardsDeck[0:-len(deck.cardsDeck)+PLAYERNUM*4])  # Give cards to players (at the begin 4 to each)
 deck.cardsDeck = deck.cardsDeck[-len(deck.cardsDeck)+PLAYERNUM*4:]
-deck.putCardOnTable (game.playersArray[game.currentPlayer].getPlayerCards(3))
-game.playersArray[game.currentPlayer].makeTurn(3)
-game.setCurrentSuit(deck.getCurrentCardOnTable()[0][len(deck.getCurrentCardOnTable()[0])-1])
+#deck.putCardOnTable (game.playersArray[game.currentPlayer].getPlayerCards(3))
+#game.playersArray[game.currentPlayer].makeTurn(3)
+#game.setCurrentSuit(deck.getCurrentCardOnTable()[0][len(deck.getCurrentCardOnTable()[0])-1])
+deck.putCardOnTable (deck.giveCard())
+game.setCurrentSuit(deck.getCurrentCardOnTable()[-1:])
+
 
 def checkCurrentCardOnTable(card):
 
@@ -37,21 +40,14 @@ def checkCurrentCardOnTable(card):
     if ("A" in card[0]):
         game.nextPlayerTurn()
 
-
-
 def checkIfEnd():
     for i in range (0, PLAYERNUM):
         if (len(game.playersArray[i].getPlayerCards()) == 0):
             return True
     return False
 
-#deck.currentCard = ["9d"]
 
-# kl = 0
-# while(kl<1):
-#     kl+=1
-
-print (game.currentSuit)
+print (game.getCurrnetSuit())
 
 checkCurrentCardOnTable(deck.getCurrentCardOnTable())
 

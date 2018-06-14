@@ -44,6 +44,9 @@ class Deck:
         del self.cardsDeck[i]
         return newCard
 
+    def setCurrentCard(self, card):
+        self.currentCard = card
+
     def shuffleDeck(self):
         random.shuffle(self.cardsDeck)
 
