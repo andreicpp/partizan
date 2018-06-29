@@ -40,12 +40,17 @@ def checkCurrentCardOnTable(card):
     if ("A" in card[0]):
         game.nextPlayerTurn()
 
-def checkIfEnd():
+def checkIfNotEnd():
     for i in range (0, PLAYERNUM):
         if (len(game.playersArray[i].getPlayerCards()) == 0):
-            return True
-    return False
+            return False
+    return True
 
+def changeSuit(suit):
+    game.setCurrentSuit(suit)
+
+def checkIfGoodCard(card):
+    if (game.getCurrnetSuit() ==
 
 print (game.getCurrnetSuit())
 
@@ -56,5 +61,12 @@ print (deck.getCurrentCardOnTable())
 for i in range(0, PLAYERNUM):
     print(game.playersArray[i].getPlayerCards())
 
-print (game.getCurrentPlayer())
+print (len(game.playersArray[0].getPlayerCards()))
+
+while checkIfNotEnd():
+    print ("PLAYER", game.getCurrentPlayer()+1, "TURN. CARDS:")
+    print (game.playersArray[game.getCurrentPlayer()].getPlayerCards());
+    chosenCard = input ("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
+    
+
 #print (deck.getAllCardsInDeck())
