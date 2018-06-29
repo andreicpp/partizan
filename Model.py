@@ -49,8 +49,8 @@ def checkIfNotEnd():
 def changeSuit(suit):
     game.setCurrentSuit(suit)
 
-def checkIfGoodCard(card):
-    if (game.getCurrnetSuit() ==
+# def checkIfGoodCard(card):
+#     if (game.getCurrnetSuit() ==
 
 print (game.getCurrnetSuit())
 
@@ -64,9 +64,30 @@ for i in range(0, PLAYERNUM):
 print (len(game.playersArray[0].getPlayerCards()))
 
 while checkIfNotEnd():
-    print ("PLAYER", game.getCurrentPlayer()+1, "TURN. CARDS:")
-    print (game.playersArray[game.getCurrentPlayer()].getPlayerCards());
-    chosenCard = input ("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
-    
 
-#print (deck.getAllCardsInDeck())
+    print ("PLAYER", game.getCurrentPlayer()+1, "TURN. CARDS:")
+    print (game.playersArray[game.getCurrentPlayer()].getPlayerCards())
+
+######################### PLAYER CHOOSE CARD FOR TURN ###################################
+    chosenCard = input("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
+    if (chosenCard != ''):
+        int(chosenCard)
+        game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1)
+        game.nextPlayerTurn()
+    else:
+        game.playersArray[game.getCurrentPlayer()].takeCardfromDeck(deck.giveCard())
+        print ("PLAYER", game.getCurrentPlayer()+1, "TURN. CARDS:")
+        print (game.playersArray[game.getCurrentPlayer()].getPlayerCards())
+        chosenCard = input("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
+        if (chosenCard != ''):
+            int(chosenCard)
+            game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1)
+        else:
+            game.nextPlayerTurn()
+################################ END OF BLOCK #########################################
+
+
+
+    # print (deck.getCurrentCardOnTable())
+    # for i in range(0, PLAYERNUM):
+    #     print(game.playersArray[i].getPlayerCards())
