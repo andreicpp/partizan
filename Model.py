@@ -8,9 +8,7 @@ deck = Deck()
 
 game = PlayersStats(PLAYERNUM, deck.cardsDeck[0:-len(deck.cardsDeck)+PLAYERNUM*4])  # Give cards to players (at the begin 4 to each)
 deck.cardsDeck = deck.cardsDeck[-len(deck.cardsDeck)+PLAYERNUM*4:]
-#deck.putCardOnTable (game.playersArray[game.currentPlayer].getPlayerCards(3))
-#game.playersArray[game.currentPlayer].makeTurn(3)
-#game.setCurrentSuit(deck.getCurrentCardOnTable()[0][len(deck.getCurrentCardOnTable()[0])-1])
+
 deck.putCardOnTable (deck.giveCard())
 game.setCurrentSuit(deck.getCurrentCardOnTable()[-1:])
 
@@ -49,8 +47,9 @@ def checkIfNotEnd():
 def changeSuit(suit):
     game.setCurrentSuit(suit)
 
-# def checkIfGoodCard(card):
-#     if (game.getCurrnetSuit() ==
+
+
+
 
 print (game.getCurrnetSuit())
 
@@ -72,7 +71,7 @@ while checkIfNotEnd():
     chosenCard = input("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
     if (chosenCard != ''):
         int(chosenCard)
-        game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1)
+        deck.putCardOnTable(game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1))
         game.nextPlayerTurn()
     else:
         game.playersArray[game.getCurrentPlayer()].takeCardfromDeck(deck.giveCard())
@@ -81,13 +80,13 @@ while checkIfNotEnd():
         chosenCard = input("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
         if (chosenCard != ''):
             int(chosenCard)
-            game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1)
+            deck.putCardOnTable(game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1))
         else:
             game.nextPlayerTurn()
 ################################ END OF BLOCK #########################################
 
+    print (deck.getCurrentCardOnTable())
+    print (deck.getCurrentSuit())
 
-
-    # print (deck.getCurrentCardOnTable())
-    # for i in range(0, PLAYERNUM):
-    #     print(game.playersArray[i].getPlayerCards())
+    for i in range (0, len(deck.cardsOnTable)):
+        print(deck.cardsOnTable)

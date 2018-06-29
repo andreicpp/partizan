@@ -12,6 +12,7 @@ class Deck:
                  "Kc", "Kd", "Kh", "Ks",
                  "Ac", "Ad", "Ah", "As"]
     currentCard = ""
+    currentSuit = ""
     usedCards = []
     cardsOnTable = []
 
@@ -31,8 +32,10 @@ class Deck:
         return cards
 
     def putCardOnTable(self, card):
-        self.cardsOnTable += card
         self.currentCard = card
+        self.cardsOnTable.append(card)
+        self.currentSuit = self.currentCard[-1:]
+
 
     def giveCard(self):
         if (len(self.cardsDeck) == 0):
@@ -53,8 +56,11 @@ class Deck:
     def getCurrentCardOnTable(self):
         return self.currentCard
 
-    def getAllCardsInDeck(self):
-        return self.cardsDeck
+    def getAllCardsOnTable(self):
+        return self.cardsOnTable
 
     def getAllUsedCards(self):
         return self.usedCards
+
+    def getCurrentSuit(self):
+        return self.currentSuit
