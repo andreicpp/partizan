@@ -13,6 +13,7 @@ class Deck:
                  "Ac", "Ad", "Ah", "As"]
     currentCard = ""
     currentSuit = ""
+    currentCardType = ""
     usedCards = []
     cardsOnTable = []
 
@@ -35,6 +36,7 @@ class Deck:
         self.currentCard = card
         self.cardsOnTable.append(card)
         self.currentSuit = self.currentCard[-1:]
+        self.currentCardType = self.currentCard[0:-1]
 
 
     def giveCard(self):
@@ -47,8 +49,6 @@ class Deck:
         del self.cardsDeck[i]
         return newCard
 
-    def setCurrentCard(self, card):
-        self.currentCard = card
 
     def shuffleDeck(self):
         random.shuffle(self.cardsDeck)
@@ -62,5 +62,11 @@ class Deck:
     def getAllUsedCards(self):
         return self.usedCards
 
+    def setNewSuit(self, suit):
+        self.currentSuit = suit
+        
     def getCurrentSuit(self):
         return self.currentSuit
+
+    def getCurrentCardType(self):
+        return self.currentCardType

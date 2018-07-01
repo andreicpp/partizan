@@ -13,8 +13,13 @@ class Player:
         del self.cardsAvail[n]
         return selectedCard
 
-    def getPlayerCards(self, n=0):                                      # Do display availiable cards
-        return self.cardsAvail[n:len(self.cardsAvail)]
+    # def getPlayerCards(self, n=0):                                      # Do display availiable cards
+    #     return self.cardsAvail[n:len(self.cardsAvail)]
+    #
+    def getPlayerCards(self, begin=0, end=False):
+        if end is False:
+            end = len(self.cardsAvail)                                    # Do display availiable cards
+        return self.cardsAvail[begin:end]
 
 def makePlayer(card1, card2, card3, card4):                                         # Player constructor
     player = Player()

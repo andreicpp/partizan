@@ -10,7 +10,7 @@ game = PlayersStats(PLAYERNUM, deck.cardsDeck[0:-len(deck.cardsDeck)+PLAYERNUM*4
 deck.cardsDeck = deck.cardsDeck[-len(deck.cardsDeck)+PLAYERNUM*4:]
 
 deck.putCardOnTable (deck.giveCard())
-game.setCurrentSuit(deck.getCurrentCardOnTable()[-1:])
+#game.setCurrentSuit(deck.getCurrentCardOnTable()[-1:])
 
 
 def checkCurrentCardOnTable(card):
@@ -20,6 +20,7 @@ def checkCurrentCardOnTable(card):
         else : i = game.getCurrentPlayer()-1
         game.playersArray[i].takeCardfromDeck(deck.giveCard())
         if (game.howMuchPlayers() == 2): game.nextPlayerTurn()
+        return
 
     if ("7" in card[0]):
         if (game.getCurrentPlayer() == PLAYERNUM-1): i = 0
@@ -27,6 +28,7 @@ def checkCurrentCardOnTable(card):
         for j in range (0, 2):
             game.playersArray[i].takeCardfromDeck(deck.giveCard())
         game.nextPlayerTurn()
+        return
 
     if ("9d" in card):
         if (game.getCurrentPlayer() == PLAYERNUM-1): i = 0
@@ -34,9 +36,11 @@ def checkCurrentCardOnTable(card):
         for j in range (0, 5):
             game.playersArray[i].takeCardfromDeck(deck.giveCard())
         game.nextPlayerTurn()
+        return
 
     if ("A" in card[0]):
         game.nextPlayerTurn()
+        return
 
 def checkIfNotEnd():
     for i in range (0, PLAYERNUM):
@@ -47,46 +51,58 @@ def checkIfNotEnd():
 def changeSuit(suit):
     game.setCurrentSuit(suit)
 
+def isGoodCard(chosenCard):
+    if (chosenCard[0:-1] == 'J'):
+        return True
+    if (chosenCard[-1:] == deck.getCurrentSuit()):
+        return True
+    if (chosenCard[0:-1] == deck.getCurrentCardType()):
+        return True
+    return False
 
-
-
-
-print (game.getCurrnetSuit())
-
-checkCurrentCardOnTable(deck.getCurrentCardOnTable())
-
-
-print (deck.getCurrentCardOnTable())
-for i in range(0, PLAYERNUM):
-    print(game.playersArray[i].getPlayerCards())
-
-print (len(game.playersArray[0].getPlayerCards()))
 
 while checkIfNotEnd():
 
-    print ("PLAYER", game.getCurrentPlayer()+1, "TURN. CARDS:")
+    checkCurrentCardOnTable(deck.getCurrentCardOnTable())
+    game.nextPlayerTurn()
+
+    for i in range(0, PLAYERNUM):
+        print(game.playersArray[i].getPlayerCards())
+
+    print ("current:", deck.getCurrentCardOnTable())
+    print("current card:", deck.getCurrentCardType())
+    print ("current suit:", deck.getCurrentSuit())
+    print("on table:",deck.getAllCardsOnTable())
+
+    print ("No:", game.getCurrentPlayer()+1, ":")
     print (game.playersArray[game.getCurrentPlayer()].getPlayerCards())
 
 ######################### PLAYER CHOOSE CARD FOR TURN ###################################
-    chosenCard = input("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
-    if (chosenCard != ''):
-        int(chosenCard)
-        deck.putCardOnTable(game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1))
-        game.nextPlayerTurn()
-    else:
-        game.playersArray[game.getCurrentPlayer()].takeCardfromDeck(deck.giveCard())
-        print ("PLAYER", game.getCurrentPlayer()+1, "TURN. CARDS:")
-        print (game.playersArray[game.getCurrentPlayer()].getPlayerCards())
+    while (True):
         chosenCard = input("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
-        if (chosenCard != ''):
-            int(chosenCard)
-            deck.putCardOnTable(game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1))
-        else:
-            game.nextPlayerTurn()
+
+        if (chosenCard != '' and isGoodCard(''.join(game.playersArray[game.getCurrentPlayer()].getPlayerCards(int(chosenCard)-1, int(chosenCard))))):
+                deck.putCardOnTable(game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1))
+                if (deck.getCurrentCardType() == 'J'):
+                    newSuit = input("CHANGE SUIT:")
+                    deck.setNewSuit(newSuit)
+                break
+        if (chosenCard == ''):
+            game.playersArray[game.getCurrentPlayer()].takeCardfromDeck(deck.giveCard())
+            print ("No:", game.getCurrentPlayer()+1, ":")
+            print (game.playersArray[game.getCurrentPlayer()].getPlayerCards())
+            while (True):
+                chosenCard = input("CHOUSE NUMBER THE CARD (\"Press enter\" if no card):")
+                if (chosenCard != '' and isGoodCard(''.join(game.playersArray[game.getCurrentPlayer()].getPlayerCards(int(chosenCard)-1, int(chosenCard))))):
+                    deck.putCardOnTable(game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1))
+                    if (deck.getCurrentCardType() == 'J'):
+                        newSuit = input("CHANGE SUIT:")
+                        deck.setNewSuit(newSuit)
+                    break
+                if (chosenCard == ''):
+                    break
+                print ("wrong card")
+            break
+        print ("wrong card")
+
 ################################ END OF BLOCK #########################################
-
-    print (deck.getCurrentCardOnTable())
-    print (deck.getCurrentSuit())
-
-    for i in range (0, len(deck.cardsOnTable)):
-        print(deck.cardsOnTable)
