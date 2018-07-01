@@ -5,7 +5,7 @@ class PlayersStats:
 
     numberOfPlayers = 0
     currentPlayer = 0                       #from 0 to N-1
-    playersScore = []
+    playersScore = []                       # score of each player
     playersArray = []                       #
     currentSuit = ""
 
