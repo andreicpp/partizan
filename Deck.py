@@ -14,18 +14,10 @@ class Deck:
     currentCard = ""
     currentSuit = ""
     currentCardType = ""
-    usedCards = []
     cardsOnTable = []
-
 
     def __init__(self):
         random.shuffle(self.cardsDeck)
-
-    def getDeckSize(self):
-        return len(self.cardsDeck)
-
-    def getDeckArray(self):
-        return self.cardsDeck
 
     def putCardOnTable(self, card):
         self.currentCard = card
@@ -33,29 +25,27 @@ class Deck:
         self.currentSuit = self.currentCard[-1:]
         self.currentCardType = self.currentCard[0:-1]
 
-
     def giveCard(self):
         if (len(self.cardsDeck) == 0):
-            self.cardsDeck = self.usedCards
-            self.usedCards = []
-            self.shuffleDeck
+            self.cardsDeck = self.cardsOnTable[:-1]
+            self.cardsOnTable = self.cardsOnTable[len(self.cardsOnTable)-1:]
+            self.shuffleDeck()
         i = random.randint(0, len(self.cardsDeck)-1)
         newCard = self.cardsDeck[i]
         del self.cardsDeck[i]
         return newCard
 
-
     def shuffleDeck(self):
         random.shuffle(self.cardsDeck)
+
+    def setNewCard(self, card):
+        self.currentCard = card
 
     def getCurrentCardOnTable(self):
         return self.currentCard
 
     def getAllCardsOnTable(self):
         return self.cardsOnTable
-
-    def getAllUsedCards(self):
-        return self.usedCards
 
     def setNewSuit(self, suit):
         self.currentSuit = suit
@@ -66,5 +56,8 @@ class Deck:
     def getCurrentCardType(self):
         return self.currentCardType
 
-    def setNewCard(self, card):
-        self.currentCard = card
+    def getDeckSize(self):
+        return len(self.cardsDeck)
+
+    def getDeckArray(self):
+        return self.cardsDeck
