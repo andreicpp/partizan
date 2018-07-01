@@ -5,7 +5,7 @@ class PlayersStats:
 
     numberOfPlayers = 0
     currentPlayer = 0                       # from 0 to N-1
-    playersScore = []                       # score of each player
+    playersScore = [0,0,0,0]                       # score of each player
     playersArray = []                       #
     currentSuit = ""
 
@@ -27,11 +27,20 @@ class PlayersStats:
     def setCurrentSuit(self, suit):
         self.currentSuit = suit
 
+    def setPlayersScore(self, nr, score):
+        if (nr<0):
+            self.playersScore[self.numberOfPlayers-1] = score
+        else:
+            self.playersScore[nr] = score
+
     def getCurrentPlayer(self):
         return self.currentPlayer
 
     def getCurrnetSuit(self):
         return self.currentSuit
+
+    def getPlayersScore(self):
+        return self.playersScore
 
     def howMuchPlayers(self):
         return self.numberOfPlayers

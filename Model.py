@@ -2,15 +2,6 @@ from Player import Player
 from Deck import Deck
 from PlayersStats import PlayersStats
 
-PLAYERNUM = 4
-
-deck = Deck()
-
-game = PlayersStats(PLAYERNUM, deck.cardsDeck[0:-len(deck.cardsDeck)+PLAYERNUM*4])  # Give cards to players (at the begin 4 to each)
-deck.cardsDeck = deck.cardsDeck[-len(deck.cardsDeck)+PLAYERNUM*4:]
-
-deck.putCardOnTable (deck.giveCard())
-
 def checkCurrentCardOnTable(card, ifFirstRound=0):
 
     if ("6" in card[0]):
@@ -46,9 +37,6 @@ def checkIfNotEnd():
             return False
     return True
 
-def changeSuit(suit):
-    game.setCurrentSuit(suit)
-
 def isGoodCard(chosenCard):
     if (chosenCard[0:-1] == 'J'):
         return True
@@ -58,7 +46,40 @@ def isGoodCard(chosenCard):
         return True
     return False
 
+def calculatePlayerScore():
+    for i in range(0, PLAYERNUM):
+        score = 0
+        cardType = ''
+        for j in range(0, len(game.playersArray[i].getPlayerCards())):
+            cardType = game.playersArray[i].getPlayerCards()[j][0:-1]
+            try:
+                score += int(cardType)
+            except ValueError:
+                if (cardType == 'A'): score += 11
+                if (cardType == 'K'): score += 4
+                if (cardType == 'Q'):
+                    if (len(game.playersArray[i].getPlayerCards()) == 1): score += 30
+                    else: score +=3
+                if (cardType == 'J'):
+                    if (len(game.playersArray[i].getPlayerCards()) == 1): score += 20
+                    else: score +=2
+        game.setPlayersScore(i, score)
+    if(deck.getCurrentCardType() == "Q"): game.setPlayersScore(game.getCurrentPlayer()-1, -30)
+    if(deck.getCurrentCardType() == "J"): game.setPlayersScore(game.getCurrentPlayer()-1, -20)
+
+PLAYERNUM = 4
+
+deck = Deck()
+
+game = PlayersStats(PLAYERNUM, deck.cardsDeck[0:-len(deck.cardsDeck)+PLAYERNUM*4])  # Give cards to players (at the begin 4 to each)
+deck.cardsDeck = deck.cardsDeck[-len(deck.cardsDeck)+PLAYERNUM*4:]
+
+deck.putCardOnTable (deck.giveCard())
+
 checkCurrentCardOnTable(deck.getCurrentCardOnTable(), 1)
+
+
+calculatePlayerScore()
 
 while checkIfNotEnd():
 
@@ -79,7 +100,7 @@ while checkIfNotEnd():
 
         if (chosenCard != '' and isGoodCard(''.join(game.playersArray[game.getCurrentPlayer()].getPlayerCards(int(chosenCard)-1, int(chosenCard))))):
                 deck.putCardOnTable(game.playersArray[game.getCurrentPlayer()].makeTurn(int(chosenCard)-1))
-                if (deck.getCurrentCardType() == 'J'):
+                if (deck.getCurrentCardType() == 'J' and len(game.playersArray[game.getCurrentPlayer()].getPlayerCards())>0):
                     newSuit = input("CHANGE SUIT:")
                     deck.setNewSuit(newSuit)
                 checkCurrentCardOnTable(deck.getCurrentCardOnTable())
@@ -106,3 +127,5 @@ while checkIfNotEnd():
 ################################ END OF BLOCK #########################################
 
     game.nextPlayerTurn()
+
+calculatePlayerScore()
