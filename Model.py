@@ -66,10 +66,6 @@ while checkIfNotEnd():
 
     checkCurrentCardOnTable(deck.getCurrentCardOnTable())
 
-    print (deck.getDeckSize())
-    print (deck.getDeckArray())
-    print (len(deck.getDeckArray()))
-
     for i in range(0, PLAYERNUM):
         print(game.playersArray[i].getPlayerCards())
 
