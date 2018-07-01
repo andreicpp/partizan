@@ -27,6 +27,8 @@ def checkCurrentCardOnTable(card):
         else : i = game.getCurrentPlayer()+1
         for j in range (0, 2):
             game.playersArray[i].takeCardfromDeck(deck.giveCard())
+        if (PLAYERNUM*4 + deck.getDeckSize() + 2 + 1 == 36):                         # if "7" - to make aditional turn in firs round
+            game.nextPlayerTurn()
         game.nextPlayerTurn()
         return
 
@@ -60,11 +62,13 @@ def isGoodCard(chosenCard):
         return True
     return False
 
-
 while checkIfNotEnd():
 
     checkCurrentCardOnTable(deck.getCurrentCardOnTable())
-    game.nextPlayerTurn()
+
+    print (deck.getDeckSize())
+    print (deck.getDeckArray())
+    print (len(deck.getDeckArray()))
 
     for i in range(0, PLAYERNUM):
         print(game.playersArray[i].getPlayerCards())
@@ -105,4 +109,5 @@ while checkIfNotEnd():
             break
         print ("wrong card")
 
+    game.nextPlayerTurn()
 ################################ END OF BLOCK #########################################

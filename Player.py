@@ -16,8 +16,8 @@ class Player:
     # def getPlayerCards(self, n=0):                                      # Do display availiable cards
     #     return self.cardsAvail[n:len(self.cardsAvail)]
     #
-    def getPlayerCards(self, begin=0, end=False):
-        if end is False:
+    def getPlayerCards(self, begin=0, end=None):
+        if end is None:
             end = len(self.cardsAvail)                                    # Do display availiable cards
         return self.cardsAvail[begin:end]
 

@@ -21,16 +21,11 @@ class Deck:
     def __init__(self):
         random.shuffle(self.cardsDeck)
 
-    def discardPile(self):
-        self.usedCards = self.cardsOnTable
-        self.cardsOnTable = []
-        self.currentCard = ""
+    def getDeckSize(self):
+        return len(self.cardsDeck)
 
-    def abbadonDefense(self):
-        cards = self.cardsOnTable
-        self.cardsOnTable = []
-        self.currentCard = ""
-        return cards
+    def getDeckArray(self):
+        return self.cardsDeck
 
     def putCardOnTable(self, card):
         self.currentCard = card
@@ -64,9 +59,12 @@ class Deck:
 
     def setNewSuit(self, suit):
         self.currentSuit = suit
-        
+
     def getCurrentSuit(self):
         return self.currentSuit
 
     def getCurrentCardType(self):
         return self.currentCardType
+
+    def setNewCard(self, card):
+        self.currentCard = card
